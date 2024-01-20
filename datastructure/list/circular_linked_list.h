@@ -4,11 +4,8 @@
 #include <iostream>
 
 template <typename T>
-struct circular_node
-{
-    T value;
-    circular_node<T> *next;
-    circular_node<T> *prev;
+struct circular_node : node<T> {
+    node<T> *prev;
 };
 
 template <typename T>
@@ -22,38 +19,15 @@ class circular_linked_list : public linked_list<T> {
         head = nullptr;
         size = 0;
     }
-
-    bool empty()
-    {
-        return size == 0;
-    }
-    void clear()
-    {
-        circular_node<T> *temp = head;
-
-        while (temp != nullptr)
-        {
-            circular_node<T> *next = temp->next;
-            delete temp;
-            temp = next;
-        }
-
-        head = nullptr;
-        size = 0;
-    }
-    T first()
-    {
-        return head->value;
-    }
     T last()
     {
         return head->prev->value;
     }
     void remove(T value)
     {
-        circular_node<T> *pointer = find_pointer(value);
-        circular_node<T> *prev_pointer = pointer->prev;
-        circular_node<T> *next_pointer = pointer->next;
+        circular_node<T> *pointer = (circular_node<T>*)(this->find_pointer(value));
+        circular_node<T> *prev_pointer = (circular_node<T>*)pointer->prev;
+        circular_node<T> *next_pointer = (circular_node<T>*)pointer->next;
 
 
         delete pointer;
@@ -90,14 +64,14 @@ class circular_linked_list : public linked_list<T> {
 
         while(index != 1){
             index--;
-            temp = temp->next;
+            temp = (circular_node<T>*)(temp->next);
         }
 
 
         n->next = temp->next;
         n->prev = temp;
         temp->next = n;
-        n->next->prev = n;
+        ((circular_node<T>*)n->next)->prev = n;
         size++;
     }
     void push(T value)
@@ -108,22 +82,6 @@ class circular_linked_list : public linked_list<T> {
         n->prev = head->prev;
         head->prev = n;
         n->prev->next = n;
-    }
-    T find(T value)
-    {
-        circular_node<T>* n_ptr = find_pointer(value);
-        return n_ptr->value;
-    }
-    void print(){
-        if(size == 0) return;
-        circular_node<T>* temp = head;
-        
-        while (temp != nullptr)
-        {
-            std::cout << temp->value << " ";
-            temp = temp->next;
-        }
-        std::cout << "\n";
     }
 };
 

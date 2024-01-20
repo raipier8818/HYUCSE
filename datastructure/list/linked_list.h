@@ -131,15 +131,19 @@ void linked_list<T>::remove(T value)
     node<T> *prev_pointer = find_prev_pointer(pointer);
     node<T> *next_pointer = pointer->next;
 
-
-    delete pointer;
-    _size--;
-    if(prev_pointer == nullptr){
-        head = nullptr;
-        return;
-    }
+    // using namespace std;
+    // cout << pointer << endl;
+    // cout << prev_pointer << endl;
+    // cout << next_pointer << endl;
     
-    prev_pointer->next = next_pointer;
+    if(prev_pointer == nullptr){
+        head = next_pointer;
+    }else {
+        prev_pointer->next = next_pointer;
+    }
+
+    _size--;
+    delete pointer;
 }
 
 template <typename T>

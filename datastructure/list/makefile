@@ -1,4 +1,4 @@
 CC=g++
 
-main : main.o
-	g++ -o main main.cc
+main : main.o ../test/test.h ./*.h
+	g++ -o main main.cc 
