@@ -11,4 +11,5 @@
 - `remove`
 - `insert`
 
-## 2. 
+## 2. Circular Linked List (inherit Linked List)
+
