@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <stdio.h>
+#include <random>
 
 #define ANSI_COLOR_RED "\x1b[31m"
 #define ANSI_COLOR_GREEN "\x1b[32m"
@@ -138,10 +139,21 @@ public:
             test_result_update(0, 0, 1);
         }
     }
+    int generate_random_int(int start = 0, int end = 1000)
+    {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<int> dis(start, end);
+
+        int value = dis(gen);
+        // std::cout << value << std::endl;
+        return value;
+    }
 };
 
 /*
 
 */
+
 
 #endif
