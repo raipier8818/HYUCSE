@@ -26,7 +26,7 @@ void linked_list_insert_test(Test t, Linked_list l){
     }
 
     for(int i = 0; i < epoch; i++){
-        t.unit_test(assert_eq, l.find(inputs[i]), inputs[i]);
+        t.unit_test<int>(assert_eq, l.find(inputs[i]), inputs[i]);
     }
 
     t("insert test");
@@ -47,7 +47,7 @@ void linked_list_push_test(Test t, Linked_list l){
     }
 
     for(int i = 0; i < epoch; i++){
-        t.unit_test(assert_eq, l.find(inputs[i]), inputs[i]);
+        t.unit_test<int>(assert_eq, l.find(inputs[i]), inputs[i]);
     }
 
     t("push test");
@@ -72,7 +72,7 @@ void linked_list_remove_test(Test t, Linked_list l){
         l.remove(inputs[i]);
     }
 
-    t.unit_test(assert_eq, l.empty(), true);
+    t.unit_test<int>(assert_eq, l.empty(), true);
 
     t("remove test");
     t.reset_unit_tests();
