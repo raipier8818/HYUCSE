@@ -3,19 +3,19 @@
 #include <iostream>
 
 template <typename T>
-struct node
+struct list_node
 {
     T value;
-    node<T> *next;
+    list_node<T> *next;
 };
 template <typename T>
 class linked_list{
     protected:
-    node<T> *head;
+    list_node<T> *head;
     int _size;
-    node<T>* find_pointer(T value);
-    node<T>* find_prev_pointer(T value);
-    node<T>* find_prev_pointer(node<T>* n);
+    list_node<T>* find_pointer(T value);
+    list_node<T>* find_prev_pointer(T value);
+    list_node<T>* find_prev_pointer(list_node<T>* n);
 
     public:
     linked_list();
@@ -36,9 +36,9 @@ class linked_list{
 
 
 template <typename T>
-node<T>* linked_list<T>::find_pointer(T value)
+list_node<T>* linked_list<T>::find_pointer(T value)
 {
-    node<T> *temp = head;
+    list_node<T> *temp = head;
     while (temp != nullptr)
     {   
         if (temp->value == value)
@@ -49,9 +49,9 @@ node<T>* linked_list<T>::find_pointer(T value)
 }
 
 template <typename T>
-node<T>* linked_list<T>::find_prev_pointer(T value)
+list_node<T>* linked_list<T>::find_prev_pointer(T value)
 {
-    node<T> *temp = head;
+    list_node<T> *temp = head;
     std::cout << value << std::endl;
     while (temp->next != nullptr)
     {
@@ -64,9 +64,9 @@ node<T>* linked_list<T>::find_prev_pointer(T value)
 
 
 template <typename T>
-node<T>* linked_list<T>::find_prev_pointer(node<T>* n)
+list_node<T>* linked_list<T>::find_prev_pointer(list_node<T>* n)
 {
-    node<T>*temp = head;
+    list_node<T>*temp = head;
     while (temp->next != nullptr)
     {
         if (temp->next == n)
@@ -92,11 +92,11 @@ bool linked_list<T>::empty()
 template <typename T>
 void linked_list<T>::clear()
 {
-    node<T> *temp = head;
+    list_node<T> *temp = head;
 
     while (temp != nullptr)
     {
-        node<T> *next = temp->next;
+        list_node<T> *next = temp->next;
         delete temp;
         temp = next;
     }
@@ -114,7 +114,7 @@ T linked_list<T>::first()
 template <typename T>
 T linked_list<T>::last()
 {
-    node<T> *temp = head;
+    list_node<T> *temp = head;
 
     while (temp->next != nullptr)
     {
@@ -127,9 +127,9 @@ T linked_list<T>::last()
 template <typename T>
 void linked_list<T>::remove(T value)
 {
-    node<T> *pointer = find_pointer(value);
-    node<T> *prev_pointer = find_prev_pointer(pointer);
-    node<T> *next_pointer = pointer->next;
+    list_node<T> *pointer = find_pointer(value);
+    list_node<T> *prev_pointer = find_prev_pointer(pointer);
+    list_node<T> *next_pointer = pointer->next;
 
     // using namespace std;
     // cout << pointer << endl;
@@ -149,7 +149,7 @@ void linked_list<T>::remove(T value)
 template <typename T>
 void linked_list<T>::insert(int index, T value)
 {    
-    node<T> *n = new node<T>;
+    list_node<T> *n = new list_node<T>;
     n->value = value;
     n->next = nullptr;
 
@@ -160,7 +160,7 @@ void linked_list<T>::insert(int index, T value)
         return;
     }
 
-    node<T> *temp = head;
+    list_node<T> *temp = head;
     
 
     while(index != 1){
@@ -185,14 +185,14 @@ void linked_list<T>::push(T value)
 template <typename T>
 T linked_list<T>::find(T value)
 {
-    node<T> *n_ptr = find_pointer(value);
+    list_node<T> *n_ptr = find_pointer(value);
     return n_ptr->value;
 }
 
 template <typename T>
 void linked_list<T>::print(){
     if(_size == 0) return;
-    node<T> *temp = head;
+    list_node<T> *temp = head;
     
     while (temp != nullptr)
     {

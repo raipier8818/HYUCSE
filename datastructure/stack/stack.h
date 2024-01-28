@@ -1,18 +1,13 @@
 #ifndef STACK_H__
 #define STACK_H__
 
-template <typename T>
-struct node
-{
-    T value;
-    node<T> *next;
-};
+#include "../node/node.h"
 
 template <typename T>
 class stack
 {
     private:
-    node<T> *head;
+    list_node<T> *head;
     unsigned long _size;
 
     public:
@@ -23,7 +18,7 @@ class stack
 
     void push(T value)
     {
-        node<T> *n = new node<T>();
+        list_node<T> *n = new list_node<T>();
         n->value = value;
         n->next = head;
         head = n;
@@ -31,7 +26,7 @@ class stack
     }
     void pop()
     {
-        node<T> *n = head;
+        list_node<T> *n = head;
         head = n->next;
         delete n;
         _size--;

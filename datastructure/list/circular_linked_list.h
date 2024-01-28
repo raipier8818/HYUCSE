@@ -4,8 +4,8 @@
 #include <iostream>
 
 template <typename T>
-struct circular_node : node<T> {
-    node<T> *prev;
+struct circular_node : list_node<T> {
+    list_node<T> *prev;
 };
 
 template <typename T>
